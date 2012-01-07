@@ -15,15 +15,19 @@ def cron_check(datetime,cron):
         '''
         if c == "*":
             return True
+        
         c = int(c)
         s = int(s)
+        
         return {
-            's':lambda : (c==s and c>=0 and c<=12),
+            's':lambda : (c==s and c>=0 and c<=23),
             'm':lambda : (c==s and c>=0 and c<=59)
         }[type]()
+        
     hour,minute = cron.split(" ")
-    return _validate(hour,datetime.hour,"s") and _validate(minute,datetime.minute,"m")
+    
+    return _validate(hour,datetime.hour,"s") & _validate(minute,datetime.minute,"m")
 
 
 if __name__=="__main__":
-    print cron_check(datetime.datetime.now(),"09 06")
+    print cron_check(datetime.datetime.now(),"17 09")
