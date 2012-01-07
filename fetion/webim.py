@@ -17,6 +17,8 @@ except:
 from fetion.cron import cron_check
 from fetion.models import FetionStatus,FETION_STATUS_ENUM,SMSQueue,TaskCron
 
+PRJ_PATH = os.path.abspath('.')
+
 DOWNLOAD_ABST_DIR = u'static/code_imgs/%s'%(time.strftime('%Y/%m', time.localtime(time.time())))
 
 
@@ -105,7 +107,7 @@ class FetionWebIM():
             return True
         return False
 
-    def get_vcode_img(self,down_path=DOWNLOAD_ABST_DIR):
+    def get_vcode_img(self,down_dir_path=DOWNLOAD_ABST_DIR):
         u'''获取图片验证码
         '''
         u = urllib2.urlopen("https://webim.feixin.10086.cn/WebIM/GetPicCode.aspx?Type=ccpsession")
@@ -117,10 +119,12 @@ class FetionWebIM():
             cookie = header['set-cookie'].split(';')[0]  
             self.request.session['ccpsession'] = cookie
             #下载图片
-            if os.path.isdir(down_path) == False:
-                os.makedirs(down_path)
-            file_path = r'%s/vcode_%s.jpeg'%(down_path,"".join(random.sample(['1','2','3','4','5','6','7','8','9','0'], 5)))
-            downloaded_image = file(file_path.encode('utf-8'), "wb")
+            if os.path.isdir(r'%s/%s'%(PRJ_PATH,down_dir_path)) == False:
+                os.makedirs(r'%s/%s'%(PRJ_PATH,down_dir_path))
+                
+            file_path = r'%s/vcode_%s.jpeg'%(down_dir_path,"".join(random.sample(['1','2','3','4','5','6','7','8','9','0'], 5)))
+            download_file_path = r'%s/%s'%(PRJ_PATH,file_path)
+            downloaded_image = file(download_file_path.encode('utf-8'), "wb")
             try:
                 while True:
                     buf = u.read(65536)
@@ -130,11 +134,11 @@ class FetionWebIM():
                 downloaded_image.close()
                 u.close()
                 self.logger.debug('download webim vcode image success')
-                return file_path
+                return "/"+file_path
             except:
                 self.logger.debug('download webim vcode image failture')
             #返回图片路径
-            return "/"+downloaded_image
+            return "/"+file_path
 
     def get_contact_list(self,request):
         u'''获取用户联系人列表

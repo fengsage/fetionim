@@ -17,13 +17,11 @@ from django.http import HttpResponseRedirect
 from fetion.models import FetionStatus,FETION_STATUS_ENUM,SMSQueue,TaskCron
 from fetion.webim import FetionWebIM
 
-import logging,os,random
+import logging,random
 
 logger = logging.getLogger('fetion')
 
 FETION_URL = u"https://webim.feixin.10086.cn/WebIM/Login.aspx"
-
-PRJ_PATH = os.path.abspath('.')
 
 def login(request):
     u'''
