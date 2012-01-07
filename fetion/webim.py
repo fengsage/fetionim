@@ -125,6 +125,8 @@ class FetionWebIM():
             file_path = r'%s/vcode_%s.jpeg'%(down_dir_path,"".join(random.sample(['1','2','3','4','5','6','7','8','9','0'], 5)))
             download_file_path = r'%s/%s'%(PRJ_PATH,file_path)
             
+            print download_file_path
+            
             os.system("chmod 777 %s"%download_file_path.encode('utf-8'))
             downloaded_image = file(download_file_path.encode('utf-8'), "wb")
             try:
