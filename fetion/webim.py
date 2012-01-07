@@ -7,7 +7,12 @@ Created on 2011-12-31
 @author: fredzhu.com
 '''
 import threading,urllib,urllib2,time,datetime
-import json,os,random
+import os,random
+
+try:
+    import json
+except:
+    import simplejson as json
 
 from fetion.cron import cron_check
 from fetion.models import FetionStatus,FETION_STATUS_ENUM,SMSQueue,TaskCron
