@@ -1,0 +1,29 @@
+<h1>Queue List</h1>
+<table>
+	<tr>
+		<td>to</td>
+		<td>msg</td>
+		<td></td>
+	</tr>
+	{% for q in list %}
+	<tr>
+		<td>{{q.receiver}}</td>
+		<td>{{q.msg}}</td>
+		<td><a href="/queue/del/{{q.id}}">del</a></td>
+	</tr>
+	{% endfor %}
+</table>
+<h1>Queue Action</h1>
+<form action="/queue/add" method="post">
+	{% csrf_token %}
+	<p>
+		<label>To:</label> <input type="text" name="receiver"/>
+	</p>
+	<p>
+		<label>Msg:</label> <textarea name="msg"></textarea>
+	</p>
+	<p>
+		<input type="submit" value="add queue"/>
+	</p>
+</form>
+

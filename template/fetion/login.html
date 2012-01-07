@@ -1,0 +1,22 @@
+<form action="#" method="post">
+	{% csrf_token %}
+	<p>
+		<label>请输入飞信帐号:</label>
+		<input type="text" name="phone"/>
+	</p>
+	<p>
+		<label>请输入飞信密码:</label>
+		<input type="password" name="password"/>
+	</p>
+	<p>
+		<label>验证码:</label>
+		<input type="text" name="vcode"/>
+		<img src="{{img_url}}"/>
+	</p>
+	<p>
+		<input type="submit" value="提交"/>
+	</p>
+</form>
+<p style="color:red;">
+{{error}}
+</p>

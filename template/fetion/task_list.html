@@ -1,0 +1,42 @@
+<h1>Task List</h1>
+<table>
+	<tr>
+		<td>phone</td>
+		<td>cron</td>
+		<td>receiver</td>
+		<td>task_type</td>
+		<td></td>
+	</tr>
+	{% for q in list %}
+	<tr>
+		<td>{{q.phone}}</td>
+		<td>{{q.cron}}</td>
+		<td>{{q.receiver}}</td>
+		<td>{{q.task_type}}</td>
+		<td><a href="/task/del/{{q.id}}">del</a></td>
+	</tr>
+	{% endfor %}
+</table>
+<h1>Task Action</h1>
+<form action="/task/add" method="post">
+	{% csrf_token %}
+	<p>
+		<label>phone:</label> <input type="text" name="phone"/>
+	</p>
+	<p>
+		<label>cron:</label> <input type="text" name="cron"/>
+	</p>
+	<p>
+		<label>receiver:</label> <input type="text" name="receiver"/>
+	</p>
+	<p>
+		<label>task:</label> 
+		<select name="task_type">
+			<option value="weather">天气预报</option>
+		</select>
+	</p>
+	<p>
+		<input type="submit" value="add task"/>
+	</p>
+</form>
+

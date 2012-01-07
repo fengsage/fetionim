@@ -1,0 +1,38 @@
+<form action="#" method="POST">
+	{% csrf_token %}
+	<p>
+		<label>请输入飞信帐号:</label>
+		<input type="text" name="phone" value=""/>
+	</p>
+	<p>
+		<label>请输入网站给的安全码:</label>
+		<input type="text" name="security" value=""/>
+	</p>
+	<p>
+		<input type="submit" value="提交"/>
+	</p>
+</form>
+{% if error %}
+	<span style="color:red;">{{error}}</span>
+{% endif %}
+
+{% if status %}
+	<table>
+		<tr>
+			<td>状态</td>
+			<td>{{status.status}}</td>
+		</tr>
+		<tr>
+			<td>上次启动时间</td>
+			<td>{{status.login_time|date:"Y-m-d H:d:m"}}</td>
+		</tr>
+		<tr>
+			<td>操作</td>
+			<td>
+				{% if status.status == 'ONLINE' %}
+				<a href="/stop?phone={{status.phone}}&&security={{status.security}}">下线</a>
+				{% endif %}
+			</td>
+		</tr>
+	</table>
+{% endif %}
