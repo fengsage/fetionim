@@ -7,7 +7,10 @@ Created on 2011-12-31
 @author: fredzhu.com
 '''
 import threading,urllib,urllib2,time,datetime
-import os,random
+import os,random,sys
+
+reload(sys)
+sys.setdefaultencoding('utf8') 
 
 try:
     import json
@@ -174,7 +177,7 @@ class FetionTaskThread(threading.Thread):
     def run(self):
         run = True
         while run:
-            self.logger.debug('轮循task......')
+            self.logger.debug(u'轮循task......')
             list = TaskCron.objects.filter(phone=self.phone)
             for task in list:
                 cron = task.cron
