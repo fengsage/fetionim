@@ -127,7 +127,7 @@ class FetionWebIM():
             
             print download_file_path
             
-            os.system("chmod 777 %s"%download_file_path.encode('utf-8'))
+#            os.system("chmod 777 %s"%download_file_path.encode('utf-8'))
             downloaded_image = file(download_file_path.encode('utf-8'), "wb")
             try:
                 while True:
