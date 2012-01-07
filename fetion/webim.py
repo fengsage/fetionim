@@ -119,7 +119,7 @@ class FetionWebIM():
             #下载图片
             if os.path.isdir(down_path) == False:
                 os.makedirs(down_path)
-            file_path = u'%s/vcode_%s.jpeg'%(down_path,"".join(random.sample(['1','2','3','4','5','6','7','8','9','0'], 5)))
+            file_path = r'%s/vcode_%s.jpeg'%(down_path,"".join(random.sample(['1','2','3','4','5','6','7','8','9','0'], 5)))
             downloaded_image = file(file_path.encode('utf-8'), "wb")
             try:
                 while True:
